@@ -9,13 +9,13 @@ class BOM_UnionFind{
 private:
     size_t cnt;
     std::unordered_map<T,std::pair<T,int>> prt_rank;
-    T find(T idx) {
+    T find(T& idx) {
         if (prt_rank.count(idx) == 0) { prt_rank[idx] = { idx,0 }; cnt++; }
         else if (idx != prt_rank[idx].first) prt_rank[idx].first = find(prt_rank[idx].first);
         return prt_rank[idx].first;
     }
 public:
-    void unite(T x,T y){
+    void unite(T& x,T& y){
         T _x=find(x), _y=find(y);
         if(_x!=_y){
             if(prt_rank[_x].second>prt_rank[_y].second) prt_rank[_y].first=_x;
@@ -23,6 +23,9 @@ public:
             else{prt_rank[_x].first=_y;prt_rank[_y].second++;}
             cnt--;
         }
+    }
+    bool Same(T& x, T& y) {
+        return find(x) == find(y);
     }
 
     size_t Count(){return cnt;}

@@ -33,5 +33,9 @@ public:
         }
     }
 
+    bool Same(int x, int y) {
+        return _find(x) == _find(y);
+    }
+
     size_t Count(){return cnt;}
 };
